@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { AppConsumer } from './context/appContext'
 
-function App() {
+const App = () => {
+  // const appContext = useContext(AppContext)
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <AppConsumer>
+            {
+              ({ isClick }) => <div>{`${isClick}`} <code>src/App.js</code> and save to reload.</div>
+            }
+          </AppConsumer>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <AppConsumer>
+          {
+            ({ onClick }) => (
+              <a
+                className="App-link"
+                onClick={() => onClick()}
+                rel="noopener noreferrer"
+              >
+                Learn React
+              </a>
+            )
+          }
+        </AppConsumer>
       </header>
     </div>
   );
